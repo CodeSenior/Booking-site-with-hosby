@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+import { Toaster } from "./components/ui/toaster";
 import "./App.css";
 
 // Language wrapper component to handle URL parameters
@@ -28,6 +29,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+      <Toaster />
     </LanguageProvider>
   );
 }
