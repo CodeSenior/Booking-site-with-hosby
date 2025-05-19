@@ -18,15 +18,20 @@ export const useHosby = (options?: UseHosbyOptions) => {
     setError(null);
     
     try {
-      // Using the getConfiguration method based on hosby-ts API
-      const response = await hosby.getConfiguration();
-      setData(response);
+      // Using the find method based on the example
+      const response = await hosby.find("configuration");
       
-      if (options?.onSuccess) {
-        options.onSuccess(response);
+      if (response && response.success) {
+        setData(response.data);
+        
+        if (options?.onSuccess) {
+          options.onSuccess(response.data);
+        }
+        
+        return response.data;
+      } else {
+        throw new Error(response?.message || "Failed to fetch configuration");
       }
-      
-      return response;
     } catch (err) {
       console.error('Error fetching Hosby configuration:', err);
       setError(err);
@@ -52,20 +57,27 @@ export const useHosby = (options?: UseHosbyOptions) => {
     setError(null);
     
     try {
-      // Using the updateConfiguration method based on hosby-ts API
-      const response = await hosby.updateConfiguration(config);
-      setData(response);
+      // Using updateOne method based on the example
+      const response = await hosby.updateOne("configuration", config, [
+        { field: "id", value: config.id }
+      ]);
       
-      toast({
-        title: "Success",
-        description: "Hosby configuration updated",
-      });
-      
-      if (options?.onSuccess) {
-        options.onSuccess(response);
+      if (response && response.success) {
+        setData(response.data);
+        
+        toast({
+          title: "Success",
+          description: "Hosby configuration updated",
+        });
+        
+        if (options?.onSuccess) {
+          options.onSuccess(response.data);
+        }
+        
+        return response.data;
+      } else {
+        throw new Error(response?.message || "Failed to update configuration");
       }
-      
-      return response;
     } catch (err) {
       console.error('Error updating Hosby configuration:', err);
       setError(err);

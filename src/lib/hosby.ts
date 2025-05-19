@@ -11,4 +11,14 @@ const hosby = new HosbyClient({
   projectName: "Kanban"
 });
 
+// Initialize the client
+(async () => {
+  try {
+    await hosby.init();
+    console.log("Hosby client initialized successfully");
+  } catch (error) {
+    console.error("Error initializing Hosby client:", error);
+  }
+})();
+
 export { hosby };
