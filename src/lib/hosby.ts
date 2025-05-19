@@ -1,5 +1,5 @@
 
-import { Hosby } from 'hosby-ts';
+import Hosby from 'hosby-ts';
 
 // Initialize Hosby client
 // Note: Using publishable config information here. For a private key in production,
