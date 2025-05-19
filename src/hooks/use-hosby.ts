@@ -18,8 +18,8 @@ export const useHosby = (options?: UseHosbyOptions) => {
     setError(null);
     
     try {
-      // Using the getConfig method instead of getConfiguration
-      const response = await hosby.getConfig();
+      // Using the getConfiguration method based on hosby-ts API
+      const response = await hosby.getConfiguration();
       setData(response);
       
       if (options?.onSuccess) {
@@ -52,8 +52,8 @@ export const useHosby = (options?: UseHosbyOptions) => {
     setError(null);
     
     try {
-      // Using the updateConfig method instead of updateConfiguration
-      const response = await hosby.updateConfig(config);
+      // Using the updateConfiguration method based on hosby-ts API
+      const response = await hosby.updateConfiguration(config);
       setData(response);
       
       toast({
